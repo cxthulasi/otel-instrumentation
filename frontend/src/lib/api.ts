@@ -27,6 +27,22 @@ api.interceptors.request.use((config) => {
     }
   }
 
+  // === DEMONSTRATION: Baggage and Tracestate Headers ===
+  // These headers are added unconditionally for demonstration purposes
+  // They are part of W3C Trace Context specification for distributed tracing
+
+  // Baggage: Used to propagate user-defined key-value pairs across service boundaries
+  // Format: key1=value1,key2=value2
+  config.headers['baggage'] = 'userId=demo-user-123,sessionId=session-abc-456,environment=development';
+  console.log('Manually adding baggage header');
+
+  // Tracestate: Used to propagate vendor-specific trace information
+  // Format: vendor1=value1,vendor2=value2
+  config.headers['tracestate'] = 'coralogix=demo-state-value,custom=frontend-propagated';
+  console.log('Manually adding tracestate header');
+
+  // === END DEMONSTRATION ===
+
   return config;
 });
 
@@ -48,5 +64,39 @@ export const fetchUsers = async () => {
 
 export const fetchUser = async (id: number) => {
   const response = await api.get(`/api/users/${id}`);
+  return response.data;
+};
+
+// ============================================================
+// MANUAL INSTRUMENTATION DEMO API FUNCTIONS
+// ============================================================
+
+export const fetchDemoIndex = async () => {
+  const response = await api.get('/api/demo');
+  return response.data;
+};
+
+export const fetchDemoCustomSpans = async () => {
+  const response = await api.get('/api/demo/custom-spans');
+  return response.data;
+};
+
+export const fetchDemoSpanEvents = async () => {
+  const response = await api.get('/api/demo/span-events');
+  return response.data;
+};
+
+export const fetchDemoErrorHandling = async (shouldFail: boolean = false) => {
+  const response = await api.get(`/api/demo/error-handling${shouldFail ? '?fail=true' : ''}`);
+  return response.data;
+};
+
+export const fetchDemoContextPropagation = async () => {
+  const response = await api.get('/api/demo/context-propagation');
+  return response.data;
+};
+
+export const fetchDemoBaggage = async () => {
+  const response = await api.get('/api/demo/baggage');
   return response.data;
 };

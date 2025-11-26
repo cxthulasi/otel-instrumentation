@@ -306,6 +306,10 @@ const NAV_ITEMS: Array<NavItem> = [
     href: '/ai',
   },
   {
+    label: 'OTel Demos',
+    href: '/demo',
+  },
+  {
     label: 'Documentation',
     href: '/docs',
     children: [
