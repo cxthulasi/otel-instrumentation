@@ -17,6 +17,7 @@ build
 dist/
 build/
 infrastructure
+backup
 # misc
 .DS_Store
 *.pem

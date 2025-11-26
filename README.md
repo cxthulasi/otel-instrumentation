@@ -103,7 +103,4 @@ npm run dev:backend
 - Custom span attributes
 - Trace export to Coralogix
 
-## License
 
-MIT
-# cx-rum-frontend-ts
